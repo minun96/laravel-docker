@@ -1,0 +1,59 @@
+services: 
+
+  nginix: 
+
+    build:
+      context: .
+      dockerfile: nginix.dockerfile
+
+    ports: 
+      - 8080:80
+
+    volumes: 
+      - ./src:/var/www/html
+
+    depends_on:
+      - mysql
+      - php
+
+  mysql:
+    image: mysql:5.7
+
+    ports:
+      - 3307:3306
+
+    environment: 
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+
+    #CREATE A VOLUME TO SAVE DB DATA CHANGES
+    volumes:
+      - ./mysql:/var/lib/mysql
+
+  php:
+   
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    
+    volumes: 
+      - ./src:/var/www/html
+
+  composer:
+
+    build:
+      context: .
+      dockerfile: composer.dockerfile
+
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    command: >
+      sh -c "chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache &&
+             chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache &&
+             php-fpm"
+  
+ 
+  

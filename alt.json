@@ -1,0 +1,10 @@
+{
+  "posts": [
+    { "id": 1, "title": "Hello Mars", "author": "Me Myself"}
+  ],
+  "profile": {
+    "name": "User",
+    "lastname": "Pietropaolo",
+    "email": "testemail@test.com"
+  }
+}

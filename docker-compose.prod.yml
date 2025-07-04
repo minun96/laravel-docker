@@ -1,3 +1,5 @@
+# docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+# use this command to run production docker-compose
 services:
   
   nginx:

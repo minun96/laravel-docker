@@ -1,10 +1,11 @@
 services: 
-  nginix: 
+  nginx: 
     build:
       context: .
-      dockerfile: nginix.dockerfile
+      dockerfile: nginx.dockerfile
     ports: 
       - 8080:80
+      - 4443:443
     volumes: 
       - ./src:/var/www/html
     depends_on:
